@@ -42,12 +42,22 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/posts/'+postBody, (req, res) => {
+// app.get('/posts/'+postBody, (req, res) => {
+//     res.render('home', {
+//         home_starting_content: homeStartingContent,
+//         compose_array: compose_value_array
+//     })
+//     console.log(postBody)
+// })
+
+
+app.get('/posts/:topic', (req, res) => {
+    console.log(req.params.topic)
+
     res.render('home', {
         home_starting_content: homeStartingContent,
         compose_array: compose_value_array
     })
-    console.log(postBody)
 })
 
 
@@ -57,15 +67,12 @@ app.get('/posts/'+postBody, (req, res) => {
 
 
 
-// app.post('/compose', (req, res) => {
-//     const compose_value_obj = { 
-//         titleValue: req.body.title_value,
-//         postValue: req.body.post_value
-//     }
 
-//     compose_value_array.push(compose_value_obj)
-//     res.redirect('/')
-// })
+
+
+
+
+
 
 
 app.post('/compose', (req, res) => {
@@ -75,14 +82,25 @@ app.post('/compose', (req, res) => {
     }
 
     compose_value_array.push(compose_value_obj)
-    // res.redirect('/')
-
-    compose_value_array.forEach((element) => {
-        postBody = element.postValue
-        console.log(postBody)
-    })
-    res.redirect('/posts/'+postBody)
+    res.redirect('/')
 })
+
+
+// app.post('/compose', (req, res) => {
+//     const compose_value_obj = { 
+//         titleValue: req.body.title_value,
+//         postValue: req.body.post_value
+//     }
+
+//     compose_value_array.push(compose_value_obj)
+//     // res.redirect('/')
+
+//     compose_value_array.forEach((element) => {
+//         postBody = element.postValue
+//         console.log(postBody)
+//     })
+//     res.redirect('/posts/'+postBody)
+// })
 
 
 
