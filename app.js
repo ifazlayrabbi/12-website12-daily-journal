@@ -51,8 +51,8 @@ app.get('/', (req, res) => {
 // })
 
 
-app.get('/posts/:topic', (req, res) => {
-    console.log(req.params.topic)
+app.get('/posts/:topicName', (req, res) => {
+    console.log(req.params.topicName)
 
     res.render('home', {
         home_starting_content: homeStartingContent,
