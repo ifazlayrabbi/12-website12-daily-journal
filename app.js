@@ -52,7 +52,11 @@ app.get('/', (req, res) => {
 
 
 app.get('/posts/:topicName', (req, res) => {
-    console.log(req.params.topicName)
+    // console.log(req.params.topicName)
+    compose_value_array.forEach((element) => {
+        if(element.titleValue == req.params.topicName)
+            console.log('Successfully Matched!!')
+    })
 
     res.render('home', {
         home_starting_content: homeStartingContent,
@@ -75,15 +79,15 @@ app.get('/posts/:topicName', (req, res) => {
 
 
 
-app.post('/compose', (req, res) => {
-    const compose_value_obj = { 
-        titleValue: req.body.title_value,
-        postValue: req.body.post_value
-    }
+// app.post('/compose', (req, res) => {
+//     const compose_value_obj = { 
+//         titleValue: req.body.title_value,
+//         postValue: req.body.post_value
+//     }
 
-    compose_value_array.push(compose_value_obj)
-    res.redirect('/')
-})
+//     compose_value_array.push(compose_value_obj)
+//     res.redirect('/')
+// })
 
 
 // app.post('/compose', (req, res) => {
@@ -101,6 +105,17 @@ app.post('/compose', (req, res) => {
 //     })
 //     res.redirect('/posts/'+postBody)
 // })
+
+
+app.post('/compose', (req, res) => {
+    const compose_value_obj = { 
+        titleValue: req.body.title_value,
+        postValue: req.body.post_value
+    }
+
+    compose_value_array.push(compose_value_obj)
+    res.redirect('/')
+})
 
 
 
