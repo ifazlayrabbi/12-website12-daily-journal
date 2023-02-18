@@ -1,5 +1,16 @@
 <%- include('layouts/header') -%>
 
 <h1>Compose</h1>
+<form action="/compose" method="post">
+  <div>
+    <label>Title</label><br>
+    <input class="form-control" type="text" name='title_value'><br>
+  </div>
+  <div>
+    <label>Post</label><br>
+    <textarea class="form-control" name="post_value" cols="30" rows="10"></textarea><br>
+  </div>
+  <button class="btn btn-primary" type="submit">Publish</button>
+</form>
 
 <%- include('layouts/footer2') -%>
