@@ -14,11 +14,13 @@
 
 <% if(compose_array != ''){ %>
 
-<%   console.log(compose_array[compose_array.length-1].titleValue) %>
+<!-- <%   // console.log(compose_array[compose_array.length-1].titleValue) %> -->
 
 <!-- <%   // for(let i=0; i<compose_array.length; i++){ %>
 <%    // console.log(compose_array[i].titleValue) %>
 <% // } %> -->
+
+  <% compose_array.forEach((element) => console.log(element.titleValue)) %>
 
 <% } %>
 
