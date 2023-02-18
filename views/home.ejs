@@ -3,24 +3,31 @@
 <h1>Home</h1>
 <p><%= home_starting_content %></p>
 
-<%- include('layouts/footer') -%>
-
-
-
-
 
 
 <!-- <% // if(compose_array[0] != undefined){} %> -->
-
 <% if(compose_array != ''){ %>
+  <!-- <%   // console.log(compose_array[compose_array.length-1].titleValue) %> -->
 
-<!-- <%   // console.log(compose_array[compose_array.length-1].titleValue) %> -->
+  <!-- <%   // for(let i=0; i<compose_array.length; i++){ %>
+  <%    // console.log(compose_array[i].titleValue) %>
+  <% // } %> -->
 
-<!-- <%   // for(let i=0; i<compose_array.length; i++){ %>
-<%    // console.log(compose_array[i].titleValue) %>
-<% // } %> -->
+  <!-- <% // compose_array.forEach((element) => console.log(element.titleValue)) %> -->
+  
+  <!-- <h1><%= compose_array[compose_array.length-1].titleValue %></h1>
+  <p><%= compose_array[compose_array.length-1].postValue %></p> -->
 
-  <% compose_array.forEach((element) => console.log(element.titleValue)) %>
+  <% compose_array.forEach((element) => { %>
+    <h1><%= element.titleValue %></h1>
+    <p><%= element.postValue %></p>
+  <% }) %>
 
+
+
+
+  <%- include('layouts/footer2') -%>  
+
+<% }else { %>
+<%- include('layouts/footer') -%>
 <% } %>
-
