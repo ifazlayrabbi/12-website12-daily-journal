@@ -7,7 +7,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
 require('dotenv').config()
-//lodash
 
 
 
@@ -18,9 +17,39 @@ const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pelle
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero."
 
 
-app.get('/', (req, res) => res.render('home', {
-    home_starting_content : homeStartingContent
-}))
+
+
+
+
+const location = ['/about', '/contact', '/compose']
+const file = ['about', 'contact', 'compose']
+
+for(let i=0; i<location.length; i++){
+    app.get(location[i], (req, res) => {
+        res.render(file[i], {
+            home_starting_content : homeStartingContent,
+            about_content: aboutContent,
+            contact_content: contactContent,
+        })
+    })
+}
+
+app.get('/', (req, res) => {
+    res.render('home', {
+        home_starting_content: homeStartingContent,
+        
+    })
+})
+
+
+
+
+
+
+
+
+
+
 
 
 
