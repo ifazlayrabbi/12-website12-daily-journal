@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
 require('dotenv').config()
-const _ = require('lodash')     // kebabCase (Similar type of casing during comparison)
+const _ = require('lodash')     // lodash - String kebabCase (Similar type of casing during comparison)
 
 
 
