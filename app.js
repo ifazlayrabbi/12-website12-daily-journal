@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
 require('dotenv').config()
-const _ = require('lodash')
+const _ = require('lodash')     // kebabCase (Similar type of casing during comparison)
 
 
 
@@ -45,24 +45,35 @@ for(let i=0; i<location.length; i++){
 //     console.log(postBody)
 // })
 
-app.get('/posts/:topicName', (req, res) => {
+app.get('/posts/:topicName', (req, res) => {    // Express Route Parameters
+
     // console.log(req.params.topicName)
+
+    // res.render('post', {
+    //     title: compose_value_array[0].titleValue,
+    //     body: compose_value_array[0].bodyValue
+    // })
+
+    
+    let found = 0
     compose_value_array.forEach((element) => {
         if(_.kebabCase(element.titleValue) == _.kebabCase(req.params.topicName)){
             console.log('Successfully Matched!!')
+            found = 1
             res.render('post', {
-                title:element.titleValue,
-                body: element.postValue
+                title: element.titleValue,
+                body: element.bodyValue
             })
-        } else {
-            console.log('Not a Match!!')
-
-            res.render('home', {
-                home_starting_content: homeStartingContent,
-                compose_array: compose_value_array
-            })
-        }
+        } 
     })
+    if(found==0) {
+        console.log('Not a Match!!')
+
+        res.render('home', {
+            home_starting_content: homeStartingContent,
+            compose_array: compose_value_array
+        })
+    }
 })
 
 
@@ -98,16 +109,15 @@ app.get('/posts/:topicName', (req, res) => {
 //     res.redirect('/posts/'+postBody)
 // })
 
-
 app.post('/compose', (req, res) => {
     const compose_value_obj = { 
         titleValue: req.body.title_value,
-        postValue: req.body.post_value
+        bodyValue: req.body.body_value
     }
 
     compose_value_array.push(compose_value_obj)
-    // res.redirect('/')
-    res.redirect('/posts/:topicName')
+    let lastElement = compose_value_array.length-1
+    res.redirect('/posts/'+compose_value_array[lastElement].titleValue)
 })
 
 
