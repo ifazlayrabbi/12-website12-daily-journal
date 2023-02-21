@@ -6,6 +6,10 @@
     letter-spacing: 5px;
 }
 
+.navbar-brand a {
+    text-decoration: none;
+}
+
 .nav-item a:hover {
     color: #1abc9c !important;
 }
