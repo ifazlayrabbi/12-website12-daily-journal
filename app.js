@@ -63,17 +63,13 @@ app.get('/posts/:topicName', (req, res) => {    // Express Route Parameters
             res.render('post', {
                 title: element.titleValue,
                 body: element.bodyValue,
-                compose_array: compose_value_array
+                // compose_array: compose_value_array
             })
         } 
     })
     if(found==0) {
         console.log('Not a Match!!')
-
-        res.render('home', {
-            home_starting_content: homeStartingContent,
-            compose_array: compose_value_array
-        })
+        res.redirect('/')
     }
 })
 

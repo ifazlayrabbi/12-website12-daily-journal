@@ -25,13 +25,13 @@
 
   <% compose_array.forEach((element) => { %>
       <h1><%= element.titleValue %></h1>      
-      <p><%= (element.bodyValue).substring(0, 80) %> ... <a href='/posts/<%= element.titleValue %>'> Read More</a></p>
+      <p><%= (element.bodyValue).substring(0, 100) %> ... <a href='/posts/<%= element.titleValue %>'> Read More</a></p>
   <% }) %>
 
-  <%- include('layouts/footer2') -%>  
+  <!-- <%- // include('layouts/footer2') -%>   -->
   
-<% }else { %>
-<%- include('layouts/footer') -%>
 <% } %>
+
+<%- include('layouts/footer') -%>
 
 <!-- <% // */ %> -->
