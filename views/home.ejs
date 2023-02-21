@@ -3,12 +3,12 @@
 <h1>Home</h1>
 <p><%= home_starting_content %></p>
 
-<%- include('layouts/footer') -%>
+<!-- <%- // include('layouts/footer') -%> -->
 
 
 
 
-<% /* %>
+<!-- <% // /* %> -->
 
 <!-- <% // if(compose_array[0] != undefined){} %> -->
 <% if(compose_array != ''){ %>
@@ -24,17 +24,20 @@
   <p><%= compose_array[compose_array.length-1].postValue %></p> -->
 
   <% compose_array.forEach((element) => { %>
-    <h1><%= element.titleValue %></h1>
-    <p><%= element.postValue %></p>
+      
+      <h1><%= element.titleValue %></h1>
+      <% let link = 'http://127.0.0.1:3000/posts/'+ element.titleValue %>
+      
+      <p><%= (element.bodyValue).substring(0, 80) %> ... 
+          <a href='<%= link %>'> click here.</a>
+          <!-- <a href= 'http://127.0.0.1:3000/posts/new 1'> click here.</a> -->
+      </p>
   <% }) %>
 
-
-
-
   <%- include('layouts/footer2') -%>  
-
+  
 <% }else { %>
 <%- include('layouts/footer') -%>
 <% } %>
 
-<% */ %>
+<!-- <% // */ %> -->

@@ -62,7 +62,8 @@ app.get('/posts/:topicName', (req, res) => {    // Express Route Parameters
             found = 1
             res.render('post', {
                 title: element.titleValue,
-                body: element.bodyValue
+                body: element.bodyValue,
+                compose_array: compose_value_array
             })
         } 
     })
@@ -116,8 +117,11 @@ app.post('/compose', (req, res) => {
     }
 
     compose_value_array.push(compose_value_obj)
-    let lastElement = compose_value_array.length-1
-    res.redirect('/posts/'+compose_value_array[lastElement].titleValue)
+    
+    // let lastElement = compose_value_array.length-1
+    // res.redirect('/posts/'+compose_value_array[lastElement].titleValue)
+
+    res.redirect('/')
 })
 
 
