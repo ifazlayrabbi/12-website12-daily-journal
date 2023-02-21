@@ -24,14 +24,8 @@
   <p><%= compose_array[compose_array.length-1].postValue %></p> -->
 
   <% compose_array.forEach((element) => { %>
-      
-      <h1><%= element.titleValue %></h1>
-      <% let link = 'http://127.0.0.1:3000/posts/'+ element.titleValue %>
-      
-      <p><%= (element.bodyValue).substring(0, 80) %> ... 
-          <a href='<%= link %>'> Read More</a>
-          <!-- <a href= 'http://127.0.0.1:3000/posts/new 1'> click here.</a> -->
-      </p>
+      <h1><%= element.titleValue %></h1>      
+      <p><%= (element.bodyValue).substring(0, 80) %> ... <a href='/posts/<%= element.titleValue %>'> Read More</a></p>
   <% }) %>
 
   <%- include('layouts/footer2') -%>  
