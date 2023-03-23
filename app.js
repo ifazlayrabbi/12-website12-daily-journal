@@ -8,114 +8,69 @@ app.set('view engine', 'ejs')
 app.use(express.static("public"))
 require('dotenv').config()
 const _ = require('lodash')     // lodash - String kebabCase (Similar type of casing during comparison)
+const {Task} = require('./db')
 
 
 
+const homeStartingContent = "Keeping a record of your reading journey helps to keep you accountable and on track.  In addition, you can track your progress and see how far you’ve come, which is very motivating! You can also use your journal to look back at past books and reflect on them.  This can be especially helpful when re-reading a classic or beloved book.  You can see how much your thoughts have changed or remained the same. Reading journals is also great for improving your writing skills.  Writing about the book you’ve read allows you to practice summarizing, analyzing, and critiquing what you’ve read. Reading journals help build your literacy and comprehension skills, memory, and retention by tracking your progress and reflecting on what you’ve read."
+const aboutContent = "The uniqueness of The Daily Journal lies in its non-partisan position, in the freedom it enjoys from any influence of political parties or vested groups. Its strength is in taking position of neutrality in conflicts between good and evil, justice and injustice, right and wrong, regardless of positions held by any group or alliance. The Daily Journal carries on with the long-term responsibility is to strengthen public opinion on how the democratic system should work and how to sustain and nurture democratic norms effectively. It was a privilege for The Daily Journal to be part of a changing scene after the fall of military autocrat in early 1990s. With that privilege came an enormous responsibility of upholding the duties of a free press. The newspaper is proud to pursue that policy without relenting for the past 23 years."
+const contactContent = "The Daily Journal, 13/B, Kazi Nazrul Islam Avenue, Dhaka-1215"
 
-
-const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing."
-const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui."
-const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero."
-const compose_value_array = []
-// let postBody
-
-
-
-
-
-const location = ['/', '/about', '/contact', '/compose']
-const file = ['home', 'about', 'contact', 'compose']
+const location = ['/about', '/contact', '/compose']
+const file = ['about', 'contact', 'compose']
 
 for(let i=0; i<location.length; i++){
     app.get(location[i], (req, res) => {
+
         res.render(file[i], {
-            home_starting_content : homeStartingContent,
             about_content: aboutContent,
             contact_content: contactContent,
-            compose_array: compose_value_array
         })
     })
 }
 
-// app.get('/posts/'+postBody, (req, res) => {
-//     res.render('home', {
-//         home_starting_content: homeStartingContent,
-//         compose_array: compose_value_array
-//     })
-//     console.log(postBody)
-// })
-
-app.get('/posts/:topicName', (req, res) => {    // Express Route Parameters
-
-    // console.log(req.params.topicName)
-
-    // res.render('post', {
-    //     title: compose_value_array[0].titleValue,
-    //     body: compose_value_array[0].bodyValue
-    // })
-
-    
-    let found = 0
-    compose_value_array.forEach((element) => {
-        if(_.kebabCase(element.titleValue) == _.kebabCase(req.params.topicName)){
-            console.log('Successfully Matched!!')
-            found = 1
-            res.render('post', {
-                title: element.titleValue,
-                body: element.bodyValue,
-                // compose_array: compose_value_array
-            })
-        } 
-    })
-    if(found==0) {
-        console.log('Not a Match!!')
-        res.redirect('/')
-    }
+app.get('/', (req, res) => {
+    Task.find()
+    .then(tasksData => {
+        res.render('home', {
+            home_content : homeStartingContent,
+            tasks_data: tasksData
+        })})
+    .catch(err => {console.log(err.message)})
 })
 
+app.get('/posts/:topicName', (req, res) => {    // Express Route Parameters
+    let found = 0
 
-
-
-
-
-
-// app.post('/compose', (req, res) => {
-//     const compose_value_obj = { 
-//         titleValue: req.body.title_value,
-//         postValue: req.body.post_value
-//     }
-
-//     compose_value_array.push(compose_value_obj)
-//     res.redirect('/')
-// })
-
-
-// app.post('/compose', (req, res) => {
-//     const compose_value_obj = { 
-//         titleValue: req.body.title_value,
-//         postValue: req.body.post_value
-//     }
-
-//     compose_value_array.push(compose_value_obj)
-//     // res.redirect('/')
-
-//     compose_value_array.forEach((element) => {
-//         postBody = element.postValue
-//         console.log(postBody)
-//     })
-//     res.redirect('/posts/'+postBody)
-// })
+    Task.find()
+    .then(tasksData => {
+        tasksData.forEach((element) => {
+            if(_.kebabCase(element.taskName) == _.kebabCase(req.params.topicName)){
+                console.log('Successfully Matched!!')
+                found = 1
+                res.render('post', {
+                    title: element.taskName,
+                    body: element.taskBody                })
+            } 
+        })
+        if(found==0) {
+            console.log('Not a Match!!')
+            res.redirect('/')
+        }
+    })
+})
 
 app.post('/compose', (req, res) => {
-    const compose_value_obj = { 
-        titleValue: req.body.title_value,
-        bodyValue: req.body.body_value
-    }
+    const {task_name, task_body} = req.body
 
-    compose_value_array.push(compose_value_obj)
-    
-    // let lastElement = compose_value_array.length-1
-    // res.redirect('/posts/'+compose_value_array[lastElement].titleValue)
+    const task1 = new Task({
+        taskName: task_name,
+        taskBody: task_body
+    })
+
+    task1.save()
+    .then(() => console.log('New  task created.'))
+    .catch(err => console.log(err.message))
 
     res.redirect('/')
 })

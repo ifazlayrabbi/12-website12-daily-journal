@@ -1,37 +1,12 @@
 <%- include('layouts/header') -%>
 
 <h1>Home</h1>
-<p><%= home_starting_content %></p>
+<p><%= home_content %></p>
 
-<!-- <%- // include('layouts/footer') -%> -->
-
-
-
-
-<!-- <% // /* %> -->
-
-<!-- <% // if(compose_array[0] != undefined){} %> -->
-<% if(compose_array != ''){ %>
-  <!-- <%   // console.log(compose_array[compose_array.length-1].titleValue) %> -->
-
-  <!-- <%   // for(let i=0; i<compose_array.length; i++){ %>
-  <%    // console.log(compose_array[i].titleValue) %>
-  <% // } %> -->
-
-  <!-- <% // compose_array.forEach((element) => console.log(element.titleValue)) %> -->
-  
-  <!-- <h1><%= compose_array[compose_array.length-1].titleValue %></h1>
-  <p><%= compose_array[compose_array.length-1].postValue %></p> -->
-
-  <% compose_array.forEach((element) => { %>
-      <h1><%= element.titleValue %></h1>      
-      <p><%= (element.bodyValue).substring(0, 100) %> ... <a href='/posts/<%= element.titleValue %>'> Read More</a></p>
-  <% }) %>
-
-  <!-- <%- // include('layouts/footer2') -%>   -->
-  
-<% } %>
+<% tasks_data.forEach((element) => { %>
+    <h1><%= element.taskName %></h1>      
+    <p><%= (element.taskBody).substring(0, 70) %> ... <a href='/posts/<%= element.taskName %>'> Read More</a></p>
+<% }) %>
 
 <%- include('layouts/footer') -%>
 
-<!-- <% // */ %> -->
