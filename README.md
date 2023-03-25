@@ -1,7 +1,7 @@
 # site12-daily-journal
 Website: https://dailyjournal-fr.onrender.com
 
-
+ 
 This is a sample journal website.
 
 Features are Home, About, Contact and Compose a new post.
