@@ -9,7 +9,7 @@ app.use(express.static("public"))
 require('dotenv').config()
 const _ = require('lodash')     // lodash - String kebabCase (Similar type of casing during comparison)
 const {Task} = require('./db')
-
+ 
 
 
 const homeStartingContent = "Keeping a record of your reading journey helps to keep you accountable and on track.  In addition, you can track your progress and see how far you’ve come, which is very motivating! You can also use your journal to look back at past books and reflect on them.  This can be especially helpful when re-reading a classic or beloved book.  You can see how much your thoughts have changed or remained the same. Reading journals is also great for improving your writing skills.  Writing about the book you’ve read allows you to practice summarizing, analyzing, and critiquing what you’ve read. Reading journals help build your literacy and comprehension skills, memory, and retention by tracking your progress and reflecting on what you’ve read."
